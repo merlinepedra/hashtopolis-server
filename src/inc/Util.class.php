@@ -365,6 +365,16 @@ class Util {
   }
   
   /**
+   * TODO: document me
+   * @param $hex string
+   * @return string
+   */
+  static function hexToStr($hex) {
+    $new = pack('H*', $hex);
+    return $new;
+  }
+  
+  /**
    * Checks if the given list is a superhashlist and returns an array containing all hashlists belonging to this superhashlist.
    * If the hashlist is not a superhashlist it just returns an array containing the list itself.
    * @param $list hashlist-object

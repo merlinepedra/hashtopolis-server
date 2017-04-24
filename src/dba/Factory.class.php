@@ -37,6 +37,7 @@ class Factory {
   private static $storedValueFactory = null;
   private static $logEntryFactory = null;
   private static $notificationSettingFactory = null;
+  private static $hashlistStatsFactory = null;
 
   public static function getAgentFactory() {
     if (self::$agentFactory == null) {
@@ -305,6 +306,16 @@ class Factory {
       return $f;
     } else {
       return self::$notificationSettingFactory;
+    }
+  }
+  
+  public static function getHashlistStatsFactory() {
+    if (self::$hashlistStatsFactory == null) {
+      $f = new HashlistStatsFactory();
+      self::$hashlistStatsFactory = $f;
+      return $f;
+    } else {
+      return self::$hashlistStatsFactory;
     }
   }
 

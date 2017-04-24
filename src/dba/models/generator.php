@@ -223,6 +223,11 @@ $CONF['NotificationSetting'] = array(
   'receiver',
   'isActive'
 );
+$CONF['HashlistStats'] = array(
+  'hashlistStatsId',
+  'hashlistId',
+  'data'
+);
 
 foreach ($CONF as $NAME => $COLUMNS) {
   $class = file_get_contents(dirname(__FILE__) . "/AbstractModel.template.txt");
