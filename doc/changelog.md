@@ -17,6 +17,7 @@
 ## Features
 
 - Added possibility to change isCpuOnly and isSmall on tasks after creation
+- Added StatsGen to get password analysis for hashlists
 
 ## Technical
 

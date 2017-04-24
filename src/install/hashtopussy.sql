@@ -791,3 +791,18 @@ ALTER TABLE `TaskFile`
 
 ALTER TABLE `User`
   ADD CONSTRAINT `User_ibfk_1` FOREIGN KEY (`rightGroupId`) REFERENCES `RightGroup` (`rightGroupId`);
+
+CREATE TABLE `HashlistStats` (
+  `hashlistStatsId` int(11) NOT NULL,
+  `hashlistId` int(11) NOT NULL,
+  `data` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `HashlistStats`
+  ADD PRIMARY KEY (`hashlistStatsId`),
+  ADD UNIQUE KEY `hashlistId` (`hashlistId`);
+
+ALTER TABLE `HashlistStats`
+  MODIFY `hashlistStatsId` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `HashlistStats` ADD CONSTRAINT FOREIGN KEY (`hashlistId`) REFERENCES Hashlist(hashlistId);
