@@ -526,10 +526,6 @@ class TaskUtils {
       Factory::getTaskWrapperFactory()->delete($taskWrapper);
     }
     Factory::getAgentFactory()->getDB()->commit();
-    if (!$api) {
-      header("Location: tasks.php");
-      die();
-    }
   }
   
   /**

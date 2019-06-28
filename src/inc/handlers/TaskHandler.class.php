@@ -30,6 +30,10 @@ class TaskHandler implements Handler {
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_PRIORITY_PERM);
           TaskUtils::updatePriority($QUERY["task"], $QUERY['priority'], Login::getInstance()->getUser());
           break;
+        case DTaskAction::DELETE_TASK:
+          AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_TASK_PERM);
+          TaskUtils::delete($QUERY['task'], Login::getInstance()->getUser());
+          break;
           
         // direct queries
         case DTaskAction::SET_BENCHMARK:
@@ -71,10 +75,6 @@ class TaskHandler implements Handler {
         case DTaskAction::DELETE_FINISHED:
           AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_FINISHED_PERM);
           TaskUtils::deleteFinished(Login::getInstance()->getUser());
-          break;
-        case DTaskAction::DELETE_TASK:
-          AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_TASK_PERM);
-          TaskUtils::delete($QUERY['task'], Login::getInstance()->getUser());
           break;
         case DTaskAction::CREATE_TASK:
           AccessControl::getInstance()->checkPermission(array_merge(DTaskAction::CREATE_TASK_PERM, DAccessControl::RUN_TASK_ACCESS));

@@ -18,7 +18,7 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
-function sendRequest(section, form) {
+function sendRequest(section, form, toDelete) {
     var elements = {};
     var formData = form.elements;
 
@@ -40,6 +40,9 @@ function sendRequest(section, form) {
                         type: 'success',
                         delay: 2000
                     });
+                    if (toDelete !== undefined) {
+                        toDelete.outerHTML = "";
+                    }
                 } else {
                     $.toast({
                         title: 'Unknown Failure!',
@@ -52,6 +55,9 @@ function sendRequest(section, form) {
                 if (result.status === 0) {
                     type = 'success';
                     title = 'Success!';
+                    if (toDelete !== undefined) {
+                        toDelete.outerHTML = "";
+                    }
                 } else {
                     type = 'error';
                     title = 'Error!';
