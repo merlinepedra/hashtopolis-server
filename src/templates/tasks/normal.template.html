@@ -86,7 +86,7 @@
         <input type="hidden" name="action" value="[[$DTaskAction::DELETE_TASK]]">
         <input type="hidden" name="task" value="[[set.getVal('taskId')]]">
         <input type="hidden" name="csrf" value="[[csrf]]">
-        <button onclick="if (confirm('Really delete this task?')) sendRequest('tasks', this.form, function(){$('#tasks').DataTable().row($(this).closest('tr')).remove().draw();}); return false;" type="submit" class='btn btn-danger' data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
+        <button onclick="if (confirm('Really delete this task?')) sendRequest('tasks', this.form, function(){alert('CALLED');$('#tasks').DataTable().row($(this).closest('tr')).remove().draw();}); return false;" type="submit" class='btn btn-danger' data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
       </form>
       {{IF ![[showArchived]]}}
         <form class="float-right mx-1" action="tasks.php" method="POST" onSubmit="if (!confirm('Really archive task [[set.getVal('taskId')]]?')) return false;">
