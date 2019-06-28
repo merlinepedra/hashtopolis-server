@@ -33,7 +33,7 @@ function sendRequest(section, formId) {
         contentType: 'application/json',
         data: JSON.stringify(elements),
         success: function (result) {
-            alert(result);
+            alert(result.value);
         }
     });
 }
