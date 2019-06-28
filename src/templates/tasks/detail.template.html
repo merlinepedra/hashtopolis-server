@@ -20,7 +20,7 @@
               <input type="hidden" name="action" value="[[$DTaskAction::DELETE_TASK]]">
               <input type="hidden" name="csrf" value="[[csrf]]">
               <input type="hidden" name="task" value="[[task.getId()]]">
-              <button type="button" onclick="deleteTask(this);" class='btn btn-danger' data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
+              <button type="button" onclick="deleteTask(this); window.location.href='tasks.php';" class='btn btn-danger' data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
             </form>
           {{ENDIF}}
         </td>
