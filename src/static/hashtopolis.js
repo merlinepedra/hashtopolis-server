@@ -18,7 +18,7 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
-function sendRequest(section, form, toDelete) {
+function sendRequest(section, form, onSuccess) {
     var elements = {};
     var formData = form.elements;
 
@@ -40,9 +40,8 @@ function sendRequest(section, form, toDelete) {
                         type: 'success',
                         delay: 2000
                     });
-                    if (toDelete !== undefined) {
-                        alert("DELETE!");
-                        toDelete.outerHTML = "";
+                    if (onSuccess !== undefined) {
+                        onSuccess();
                     }
                 } else {
                     $.toast({
@@ -56,8 +55,8 @@ function sendRequest(section, form, toDelete) {
                 if (result.status === 0) {
                     type = 'success';
                     title = 'Success!';
-                    if (toDelete !== undefined) {
-                        toDelete.outerHTML = "";
+                    if (onSuccess !== undefined) {
+                        onSuccess();
                     }
                 } else {
                     type = 'error';
