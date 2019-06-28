@@ -14,11 +14,8 @@ else if (!CSRF::check($QUERY['csrf'])) {
   $ajax->send();
 }
 
-// TODO: this is only a workaround to allow compatibility during testing. When the task handler completely will be used by ajax, set everything to $QUERY
-$_POST = $QUERY;
-
 $taskHandler = new TaskHandler();
-$taskHandler->handle($QUERY['action']);
+$taskHandler->handle($QUERY['action'], $QUERY);
 
 if (UI::getNumMessages(UI::ERROR)) {
   $ajax->setStatus(DAjaxStatus::ERROR);

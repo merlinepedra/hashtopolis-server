@@ -10,7 +10,7 @@ class NotificationHandler implements Handler {
     // nothing required here
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     try {
       switch ($action) {
         case DNotificationAction::CREATE_NOTIFICATION:

@@ -5,7 +5,7 @@ class PreprocessorHandler implements Handler {
     //nothing
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     try {
       switch ($action) {
         case DPreprocessorAction::ADD_PREPROCESSOR:

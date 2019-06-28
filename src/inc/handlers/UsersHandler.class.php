@@ -5,7 +5,7 @@ class UsersHandler implements Handler {
     //nothing to do
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     try {
       switch ($action) {
         case DUserAction::DELETE_USER:

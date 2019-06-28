@@ -7,7 +7,7 @@ class ApiHandler implements Handler {
     // nothing
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     try {
       switch ($action) {
         case DApiAction::DELETE_GROUP:

@@ -6,7 +6,7 @@ class AgentBinaryHandler implements Handler {
     //nothing
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     try {
       switch ($action) {
         case DAgentBinaryAction::NEW_BINARY:

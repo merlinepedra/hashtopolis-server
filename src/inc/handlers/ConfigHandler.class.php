@@ -5,7 +5,7 @@ class ConfigHandler implements Handler {
     //we need nothing to load
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     try {
       switch ($action) {
         case DConfigAction::UPDATE_CONFIG:

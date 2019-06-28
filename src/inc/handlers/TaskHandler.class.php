@@ -22,44 +22,44 @@ class TaskHandler implements Handler {
     }
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     try {
       switch ($action) {
         case DTaskAction::SET_BENCHMARK:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_BENCHMARK_PERM);
-          TaskUtils::setBenchmark($_POST['agentId'], $_POST['bench'], Login::getInstance()->getUser());
+          TaskUtils::setBenchmark($QUERY['agentId'], $QUERY['bench'], Login::getInstance()->getUser());
           break;
         case DTaskAction::SET_SMALL_TASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_SMALL_TASK_PERM);
-          TaskUtils::setSmallTask($_POST['task'], $_POST['isSmall'], Login::getInstance()->getUser());
+          TaskUtils::setSmallTask($QUERY['task'], $QUERY['isSmall'], Login::getInstance()->getUser());
           break;
         case DTaskAction::SET_CPU_TASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_CPU_TASK_PERM);
-          TaskUtils::setCpuTask($_POST['task'], $_POST['isCpu'], Login::getInstance()->getUser());
+          TaskUtils::setCpuTask($QUERY['task'], $QUERY['isCpu'], Login::getInstance()->getUser());
           break;
         case DTaskAction::ABORT_CHUNK:
           AccessControl::getInstance()->checkPermission(DTaskAction::ABORT_CHUNK_PERM);
-          TaskUtils::abortChunk($_POST['chunk'], Login::getInstance()->getUser());
+          TaskUtils::abortChunk($QUERY['chunk'], Login::getInstance()->getUser());
           break;
         case DTaskAction::RESET_CHUNK:
           AccessControl::getInstance()->checkPermission(DTaskAction::RESET_CHUNK_PERM);
-          TaskUtils::resetChunk($_POST['chunk'], Login::getInstance()->getUser());
+          TaskUtils::resetChunk($QUERY['chunk'], Login::getInstance()->getUser());
           break;
         case DTaskAction::PURGE_TASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::PURGE_TASK_PERM);
-          TaskUtils::purgeTask($_POST['task'], Login::getInstance()->getUser());
+          TaskUtils::purgeTask($QUERY['task'], Login::getInstance()->getUser());
           break;
         case DTaskAction::SET_COLOR:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_COLOR_PERM);
-          TaskUtils::updateColor($_POST['task'], $_POST['color'], Login::getInstance()->getUser());
+          TaskUtils::updateColor($QUERY['task'], $QUERY['color'], Login::getInstance()->getUser());
           break;
         case DTaskAction::SET_TIME:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_TIME_PERM);
-          TaskUtils::changeChunkTime($_POST['task'], $_POST['chunktime'], Login::getInstance()->getUser());
+          TaskUtils::changeChunkTime($QUERY['task'], $QUERY['chunktime'], Login::getInstance()->getUser());
           break;
         case DTaskAction::RENAME_TASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::RENAME_TASK_PERM);
-          TaskUtils::rename($_POST['task'], $_POST['name'], Login::getInstance()->getUser());
+          TaskUtils::rename($QUERY['task'], $QUERY['name'], Login::getInstance()->getUser());
           break;
         case DTaskAction::DELETE_FINISHED:
           AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_FINISHED_PERM);
@@ -67,11 +67,11 @@ class TaskHandler implements Handler {
           break;
         case DTaskAction::DELETE_TASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_TASK_PERM);
-          TaskUtils::delete($_POST['task'], Login::getInstance()->getUser());
+          TaskUtils::delete($QUERY['task'], Login::getInstance()->getUser());
           break;
         case DTaskAction::SET_PRIORITY:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_PRIORITY_PERM);
-          TaskUtils::updatePriority($_POST["task"], $_POST['priority'], Login::getInstance()->getUser());
+          TaskUtils::updatePriority($QUERY["task"], $QUERY['priority'], Login::getInstance()->getUser());
           break;
         case DTaskAction::CREATE_TASK:
           AccessControl::getInstance()->checkPermission(array_merge(DTaskAction::CREATE_TASK_PERM, DAccessControl::RUN_TASK_ACCESS));
@@ -79,23 +79,23 @@ class TaskHandler implements Handler {
           break;
         case DTaskAction::DELETE_SUPERTASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_SUPERTASK_PERM);
-          TaskUtils::deleteSupertask($_POST['supertaskId'], Login::getInstance()->getUser());
+          TaskUtils::deleteSupertask($QUERY['supertaskId'], Login::getInstance()->getUser());
           break;
         case DTaskAction::SET_SUPERTASK_PRIORITY:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_SUPERTASK_PRIORITY_PERM);
-          TaskUtils::setSupertaskPriority($_POST['supertaskId'], $_POST['priority'], Login::getInstance()->getUser());
+          TaskUtils::setSupertaskPriority($QUERY['supertaskId'], $QUERY['priority'], Login::getInstance()->getUser());
           break;
         case DTaskAction::ARCHIVE_TASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::ARCHIVE_TASK_PERM);
-          TaskUtils::archiveTask($_POST['task'], Login::getInstance()->getUser());
+          TaskUtils::archiveTask($QUERY['task'], Login::getInstance()->getUser());
           break;
         case DTaskAction::ARCHIVE_SUPERTASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::ARCHIVE_SUPERTASK_PERM);
-          TaskUtils::archiveSupertask($_POST['supertaskId'], Login::getInstance()->getUser());
+          TaskUtils::archiveSupertask($QUERY['supertaskId'], Login::getInstance()->getUser());
           break;
         case DTaskAction::CHANGE_ATTACK:
           AccessControl::getInstance()->checkPermission(DTaskAction::CHANGE_ATTACK_PERM);
-          TaskUtils::changeAttackCmd($_POST['task'], $_POST['attackCmd'], Login::getInstance()->getUser());
+          TaskUtils::changeAttackCmd($QUERY['task'], $QUERY['attackCmd'], Login::getInstance()->getUser());
           break;
         case DTaskAction::DELETE_ARCHIVED:
           AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_ARCHIVED_PERM);
@@ -103,7 +103,7 @@ class TaskHandler implements Handler {
           break;
         case DTaskAction::EDIT_NOTES:
           AccessControl::getInstance()->checkPermission(DTaskAction::EDIT_NOTES_PERM);
-          TaskUtils::editNotes($_POST['task'], $_POST['notes'], Login::getInstance()->getUser());
+          TaskUtils::editNotes($QUERY['task'], $QUERY['notes'], Login::getInstance()->getUser());
           break;
         default:
           UI::addMessage(UI::ERROR, "Invalid action!");

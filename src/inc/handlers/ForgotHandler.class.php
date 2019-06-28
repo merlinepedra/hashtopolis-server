@@ -9,7 +9,7 @@ class ForgotHandler implements Handler {
     //we need nothing to load
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     switch ($action) {
       case DForgotAction::RESET:
         $this->forgot($_POST['username'], $_POST['email']);

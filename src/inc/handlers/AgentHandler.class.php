@@ -17,7 +17,7 @@ class AgentHandler implements Handler {
     }
   }
   
-  public function handle($action) {
+  public function handle($action, $QUERY = []) {
     try {
       switch ($action) {
         case DAgentAction::CLEAR_ERRORS:

@@ -26,7 +26,7 @@ Menu::get()->setActive("tasks_list");
 //catch actions here...
 if (isset($_POST['action']) && CSRF::check($_POST['csrf'])) {
   $taskHandler = new TaskHandler();
-  $taskHandler->handle($_POST['action']);
+  $taskHandler->handle($_POST['action'], $_POST);
   if (UI::getNumMessages() == 0) {
     Util::refresh();
   }
