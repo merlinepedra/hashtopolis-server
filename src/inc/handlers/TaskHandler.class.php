@@ -46,8 +46,6 @@ class TaskHandler implements Handler {
           AccessControl::getInstance()->checkPermission(DTaskAction::CHANGE_ATTACK_PERM);
           TaskUtils::changeAttackCmd($QUERY['task'], $QUERY['attackCmd'], Login::getInstance()->getUser());
           break;
-          
-        // direct queries
         case DTaskAction::SET_BENCHMARK:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_BENCHMARK_PERM);
           TaskUtils::setBenchmark($QUERY['agentId'], $QUERY['bench'], Login::getInstance()->getUser());
@@ -60,14 +58,6 @@ class TaskHandler implements Handler {
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_CPU_TASK_PERM);
           TaskUtils::setCpuTask($QUERY['task'], $QUERY['isCpu'], Login::getInstance()->getUser());
           break;
-        case DTaskAction::ABORT_CHUNK:
-          AccessControl::getInstance()->checkPermission(DTaskAction::ABORT_CHUNK_PERM);
-          TaskUtils::abortChunk($QUERY['chunk'], Login::getInstance()->getUser());
-          break;
-        case DTaskAction::RESET_CHUNK:
-          AccessControl::getInstance()->checkPermission(DTaskAction::RESET_CHUNK_PERM);
-          TaskUtils::resetChunk($QUERY['chunk'], Login::getInstance()->getUser());
-          break;
         case DTaskAction::PURGE_TASK:
           AccessControl::getInstance()->checkPermission(DTaskAction::PURGE_TASK_PERM);
           TaskUtils::purgeTask($QUERY['task'], Login::getInstance()->getUser());
@@ -79,6 +69,20 @@ class TaskHandler implements Handler {
         case DTaskAction::SET_TIME:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_TIME_PERM);
           TaskUtils::changeChunkTime($QUERY['task'], $QUERY['chunktime'], Login::getInstance()->getUser());
+          break;
+        case DTaskAction::EDIT_NOTES:
+          AccessControl::getInstance()->checkPermission(DTaskAction::EDIT_NOTES_PERM);
+          TaskUtils::editNotes($QUERY['task'], $QUERY['notes'], Login::getInstance()->getUser());
+          break;
+          
+        // direct queries
+        case DTaskAction::ABORT_CHUNK:
+          AccessControl::getInstance()->checkPermission(DTaskAction::ABORT_CHUNK_PERM);
+          TaskUtils::abortChunk($QUERY['chunk'], Login::getInstance()->getUser());
+          break;
+        case DTaskAction::RESET_CHUNK:
+          AccessControl::getInstance()->checkPermission(DTaskAction::RESET_CHUNK_PERM);
+          TaskUtils::resetChunk($QUERY['chunk'], Login::getInstance()->getUser());
           break;
         case DTaskAction::DELETE_FINISHED:
           AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_FINISHED_PERM);
@@ -103,10 +107,6 @@ class TaskHandler implements Handler {
         case DTaskAction::DELETE_ARCHIVED:
           AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_ARCHIVED_PERM);
           TaskUtils::deleteArchived(Login::getInstance()->getUser());
-          break;
-        case DTaskAction::EDIT_NOTES:
-          AccessControl::getInstance()->checkPermission(DTaskAction::EDIT_NOTES_PERM);
-          TaskUtils::editNotes($QUERY['task'], $QUERY['notes'], Login::getInstance()->getUser());
           break;
         default:
           UI::addMessage(UI::ERROR, "Invalid action!");

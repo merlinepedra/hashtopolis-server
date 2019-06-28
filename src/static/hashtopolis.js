@@ -32,9 +32,17 @@ function setTaskPriority(button) {
     $('#tasks').DataTable().cells().invalidate().draw();
 }
 
-function deleteTask(button) {
+function taskUnassignAgent(button) {
+    sendRequest('tasks', button);
+    $(button).closest('tr').outerHTML = "";
+}
+
+function deleteTask(button, onSuccess) {
     if (confirm('Really delete this task?')) {
         sendRequest('tasks', button, function (element) {
+            if (onSuccess !== undefined) {
+                onSuccess();
+            }
             $('#tasks').DataTable().row(element.closest('tr')).remove().draw();
         });
     }

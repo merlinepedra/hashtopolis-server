@@ -20,7 +20,7 @@
               <input type="hidden" name="action" value="[[$DTaskAction::DELETE_TASK]]">
               <input type="hidden" name="csrf" value="[[csrf]]">
               <input type="hidden" name="task" value="[[task.getId()]]">
-              <button type="button" onclick="deleteTask(this); window.location.href='tasks.php';" class='btn btn-danger' data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
+              <button type="button" onclick="deleteTask(this, function(){window.location.href='tasks.php'});" class='btn btn-danger' data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
             </form>
           {{ENDIF}}
         </td>
@@ -71,12 +71,12 @@
         </td>
         <td>
           {{IF [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-            <form class='form-inline' action="tasks.php?id=[[task.getId()]]" method="POST">
+            <form class='form-inline' onsubmit="return false;" method="post">
               <input type="hidden" name="action" value="[[$DTaskAction::EDIT_NOTES]]">
               <input type="hidden" name="task" value="[[task.getId()]]">
               <input type="hidden" name="csrf" value="[[csrf]]">
               <textarea class="form-control my-1" style="width: 100%" name="notes" title="Task Notes" placeholder="Write task notes here...">[[task.getNotes()]]</textarea>
-              <button type="submit" class='btn btn-light my-1' data-toggle="tooltip" data-placement="top" title="Save"><i class="fas fa-save" aria-hidden="true"></i></button>
+              <button type="button" onclick="sendRequest('tasks', this);" class='btn btn-light my-1' data-toggle="tooltip" data-placement="top" title="Save"><i class="fas fa-save" aria-hidden="true"></i></button>
             </form>
           {{ENDIF}}
         </td>
@@ -85,13 +85,13 @@
         <td>Chunk size:</td>
         <td>
           {{IF [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-            <form class='form-inline' action="tasks.php?id=[[task.getId()]]" method="POST">
+            <form class='form-inline' onsubmit="return false;" method="post">
               <input type="hidden" name="action" value="[[$DTaskAction::SET_TIME]]">
               <input type="hidden" name="task" value="[[task.getId()]]">
               <input type="hidden" name="csrf" value="[[csrf]]">
               <input type="text" class='form-control' name="chunktime" size="5" value="[[task.getChunkTime()]]" title="Chunk Length">
               &nbsp;seconds&nbsp;
-              <button type="submit" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
+              <button type="button" onclick="sendRequest('tasks', this)" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
             </form>
           {{ELSE}}
             [[task.getChunkTime()]] seconds
@@ -108,12 +108,12 @@
         <td>Color:</td>
         <td>
           {{IF [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-            <form class='form-inline' id="taskcolor" action="tasks.php?id=[[task.getId()]]" method="POST">
+            <form class='form-inline' id="taskcolor" onsubmit="return false;" method="post">
               <input type="hidden" name="action" value="[[$DTaskAction::SET_COLOR]]">
               <input type="hidden" name="task" value="[[task.getId()]]">
               <input type="hidden" name="csrf" value="[[csrf]]">
               #<input type="text" class='form-control color {required:false}' size="6" name="color" value="[[task.getColor()]]" title="Color">&nbsp;&nbsp;
-               <button type="submit" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
+               <button type="button" onclick="sendRequest('tasks', this)" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
             </form>
           {{ELSE}}
             #[[task.getColor()]]
@@ -138,12 +138,12 @@
         <td>Priority:</td>
         <td>
           {{IF [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-            <form class='form-inline' action="tasks.php?id=[[task.getId()]]" method="POST">
+            <form class='form-inline' onsubmit="return false;" method="post">
               <input type="hidden" name="action" value="[[$DTaskAction::SET_PRIORITY]]">
               <input type="hidden" name="task" value="[[task.getId()]]">
               <input type="hidden" name="csrf" value="[[csrf]]">
               <input type="text" class='form-control' name="priority" size="4" value="[[task.getPriority()]]" title="Priority">&nbsp;&nbsp;
-              <button type="submit" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
+              <button type="button" onclick="sendRequest('tasks', this)" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
             </form>
           {{ELSE}}
             [[task.getPriority()]]
@@ -154,7 +154,7 @@
         <td>Is CPU only task:</td>
         <td>
           {{IF [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-            <form class='form-inline' action="tasks.php?id=[[task.getId()]]" method="POST">
+            <form class='form-inline' onsubmit="return false;" method="post">
               <input type="hidden" name="action" value="[[$DTaskAction::SET_CPU_TASK]]">
               <input type="hidden" name="task" value="[[task.getId()]]">
               <input type="hidden" name="csrf" value="[[csrf]]">
@@ -162,7 +162,7 @@
                 <option value="0"{{IF [[task.getIsCpuTask()]] == 0}} selected{{ENDIF}}>No</option>
                 <option value="1"{{IF [[task.getIsCpuTask()]] == 1}} selected{{ENDIF}}>Yes</option>
               </select>&nbsp;&nbsp;
-              <button type="submit" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
+              <button type="button" onclick="sendRequest('tasks', this)" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
             </form>
           {{ELSE}}
             {{IF [[task.getIsCpuTask()]] == 1}}
@@ -177,7 +177,7 @@
         <td>Is small task:</td>
         <td>
           {{IF [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-            <form class='form-inline' action="tasks.php?id=[[task.getId()]]" method="POST">
+            <form class='form-inline' onsubmit="return false;" method="POST">
               <input type="hidden" name="action" value="[[$DTaskAction::SET_SMALL_TASK]]">
               <input type="hidden" name="task" value="[[task.getId()]]">
               <input type="hidden" name="csrf" value="[[csrf]]">
@@ -185,7 +185,7 @@
                 <option value="0"{{IF [[task.getIsSmall()]] == 0}} selected{{ENDIF}}>No</option>
                 <option value="1"{{IF [[task.getIsSmall()]] == 1}} selected{{ENDIF}}>Yes</option>
               </select>&nbsp;&nbsp;
-              <button type="submit" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
+              <button type="button" onclick="sendRequest('tasks', this)" class='btn btn-light' data-toggle="tooltip" data-placement="top" title="Set"><i class="fas fa-save" aria-hidden="true"></i></button>
             </form>
           {{ELSE}}
             {{IF [[task.getIsSmall()]] == 1}}
@@ -228,11 +228,11 @@
           <td>
             [[task.getKeyspaceProgress()]]{{IF [[task.getKeyspace()]] > 0}} ([[Util::showperc([[task.getKeyspaceProgress()]], [[task.getKeyspace()]])]]%){{ENDIF}}
             {{IF [[isActive]] == 0 && [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-              <form class='form-inline' action="tasks.php?id=[[task.getId()]]" method="POST" onSubmit="if (!confirm('Really completely purge task [[task.getId()]]?')) return false;">
+              <form class='form-inline' onsubmit="return false;" method="post">
                 <input type="hidden" name="action" value="[[$DTaskAction::PURGE_TASK]]">
                 <input type="hidden" name="task" value="[[task.getId()]]">
                 <input type="hidden" name="csrf" value="[[csrf]]">
-                <input type="submit" class='btn btn-danger' value="Purge">
+                <input type="button" onclick="if(confirm('Completely purge task?')) sendRequest('tasks', this, function(){location.reload()});" class='btn btn-danger' value="Purge">
               </form>
             {{ENDIF}}
           </td>
@@ -375,7 +375,7 @@
               }
               return dataLabel;
             }
-          },
+          }
         },
         hover: {
             mode: 'nearest',
@@ -454,12 +454,12 @@
           </td>
           <td>
             {{IF [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-              <form class='form-inline' action="tasks.php?id=[[task.getId()]]" method="POST">
+              <form class='form-inline' onsubmit="return false;" method="post">
                 <input type="hidden" name="action" value="[[$DTaskAction::SET_BENCHMARK]]">
                 <input type="hidden" name="agentId" value="[[agent.getId()]]">
                 <input type="hidden" name="csrf" value="[[csrf]]">
                 <input type="text" class='form-control' name="bench" value="[[agentsBench.getVal([[agent.getId()]])]]" size="20" title="Benchmark">&nbsp;
-                <input type="submit" class='btn btn-light' value="Set">
+                <input type="button" onclick="sendRequest('tasks', this)" class='btn btn-light' value="Set">
               </form>
             {{ELSE}}
               [[agentsBench.getVal([[agent.getId()]])]]
@@ -497,12 +497,12 @@
           </td>
           <td>
             {{IF [[accessControl.hasPermission([[$DAccessControl::MANAGE_TASK_ACCESS]])]]}}
-              <form style='float: left; padding-right: 5px;' action="agents.php?task=[[task.getId()]]" method="POST">
+              <form style='float: left; padding-right: 5px;' onsubmit="return false;" method="post">
                 <input type="hidden" name="action" value="[[$DAgentAction::ASSIGN_AGENT]]">
                 <input type="hidden" name="agentId" value="[[agent.getId()]]">
                 <input type="hidden" name="csrf" value="[[csrf]]">
                 <input type="hidden" name="task" value="">
-                <input type="submit" class='btn btn-light' value="Unassign">
+                <input type="button" onclick="taskUnassignAgent(this);" class='btn btn-light' value="Unassign">
               </form>
             {{ENDIF}}
           </td>
