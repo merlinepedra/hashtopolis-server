@@ -33,7 +33,21 @@ function sendRequest(section, formId) {
         contentType: 'application/json',
         data: JSON.stringify(elements),
         success: function (result) {
-            alert(result.messages.length);
+            if (result.messages.length === 0) {
+                if (result.status === 0) {
+                    $.toast({
+                        title: 'Success!',
+                        type: 'success',
+                        delay: 2000
+                    });
+                } else {
+                    $.toast({
+                        title: 'Unknown Failure!',
+                        type: 'error',
+                        delay: 2000
+                    });
+                }
+            }
         }
     });
 }
