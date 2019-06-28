@@ -23,7 +23,7 @@ function archiveTask(button) {
         sendRequest('tasks', button.form, function (form) {
             $('#tasks').DataTable().row(form.closest('tr')).remove().draw();
         });
-        $(this).tooltip.hide();
+        $(button).tooltip.hide();
     }
 }
 
@@ -32,7 +32,7 @@ function deleteTask(button) {
         sendRequest('tasks', button.form, function (form) {
             $('#tasks').DataTable().row(form.closest('tr')).remove().draw();
         });
-        $(this).tooltip.hide();
+        $(button).tooltip.hide();
     }
 }
 
