@@ -54,6 +54,17 @@ class UI {
     return $count;
   }
   
+  public static function getArr($type = "ALL") {
+    $data = [];
+    foreach (self::$objects['messages'] as $message) {
+      /** @var $message DataSet */
+      if ($message->getVal('type') == $type || $type == "ALL") {
+        $data[] = $message->getAllValues();
+      }
+    }
+    return $data;
+  }
+  
   public static function setForward($url, $delay) {
     UI::add('autorefresh', $delay);
     UI::add('autorefreshUrl', $url);
