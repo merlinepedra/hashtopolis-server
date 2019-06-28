@@ -19,26 +19,33 @@ $(function () {
 });
 
 function archiveTask(button) {
-    $("[data-toggle='tooltip']").tooltip('hide');
     if (confirm('Really archive this task?')) {
-        sendRequest('tasks', button.form, function (form) {
-            $('#tasks').DataTable().row(form.closest('tr')).remove().draw();
+        sendRequest('tasks', button, function (element) {
+            $('#tasks').DataTable().row(element.closest('tr')).remove().draw();
         });
     }
+}
+
+function setTaskPriority(button) {
+    sendRequest('tasks', button.form);
+    $(button).closest('td').attr('data-sort', button.form.priority.value);
+    $('#tasks').DataTable().cells().invalidate().draw();
 }
 
 function deleteTask(button) {
-    $("[data-toggle='tooltip']").tooltip('hide');
     if (confirm('Really delete this task?')) {
-        sendRequest('tasks', button.form, function (form) {
-            $('#tasks').DataTable().row(form.closest('tr')).remove().draw();
+        sendRequest('tasks', button, function (element) {
+            $('#tasks').DataTable().row(element.closest('tr')).remove().draw();
         });
     }
 }
 
-function sendRequest(section, form, onSuccess) {
+function sendRequest(section, button, onSuccess) {
+    // hide all tooltips after an onclick action to prevent tooltips floating around with no button
+    $("[data-toggle='tooltip']").tooltip('hide');
+
     var elements = {};
-    var formData = form.elements;
+    var formData = button.form.elements;
 
     for (var i = 0; i < formData.length; i++) {
         if (formData[i].name.length === 0) {
@@ -62,7 +69,7 @@ function sendRequest(section, form, onSuccess) {
                         delay: 2000
                     });
                     if (onSuccess !== undefined) {
-                        onSuccess(form);
+                        onSuccess(button);
                     }
                 } else {
                     $.toast({
@@ -77,7 +84,7 @@ function sendRequest(section, form, onSuccess) {
                     type = 'success';
                     title = 'Success!';
                     if (onSuccess !== undefined) {
-                        onSuccess(form);
+                        onSuccess(button);
                     }
                 } else {
                     type = 'error';
