@@ -18,6 +18,24 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+function archiveTask(button) {
+    if (confirm('Really archive this task?')) {
+        sendRequest('tasks', button.form, function (form) {
+            $('#tasks').DataTable().row(form.closest('tr')).remove().draw();
+        });
+        $(this).tooltip.hide();
+    }
+}
+
+function deleteTask(button) {
+    if (confirm('Really delete this task?')) {
+        sendRequest('tasks', button.form, function (form) {
+            $('#tasks').DataTable().row(form.closest('tr')).remove().draw();
+        });
+        $(this).tooltip.hide();
+    }
+}
+
 function sendRequest(section, form, onSuccess) {
     var elements = {};
     var formData = form.elements;
