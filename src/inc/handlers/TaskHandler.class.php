@@ -38,6 +38,10 @@ class TaskHandler implements Handler {
           AccessControl::getInstance()->checkPermission(DTaskAction::ARCHIVE_TASK_PERM);
           TaskUtils::archiveTask($QUERY['task'], Login::getInstance()->getUser());
           break;
+        case DTaskAction::RENAME_TASK:
+          AccessControl::getInstance()->checkPermission(DTaskAction::RENAME_TASK_PERM);
+          TaskUtils::rename($QUERY['task'], $QUERY['name'], Login::getInstance()->getUser());
+          break;
           
         // direct queries
         case DTaskAction::SET_BENCHMARK:
@@ -71,10 +75,6 @@ class TaskHandler implements Handler {
         case DTaskAction::SET_TIME:
           AccessControl::getInstance()->checkPermission(DTaskAction::SET_TIME_PERM);
           TaskUtils::changeChunkTime($QUERY['task'], $QUERY['chunktime'], Login::getInstance()->getUser());
-          break;
-        case DTaskAction::RENAME_TASK:
-          AccessControl::getInstance()->checkPermission(DTaskAction::RENAME_TASK_PERM);
-          TaskUtils::rename($QUERY['task'], $QUERY['name'], Login::getInstance()->getUser());
           break;
         case DTaskAction::DELETE_FINISHED:
           AccessControl::getInstance()->checkPermission(DTaskAction::DELETE_FINISHED_PERM);
