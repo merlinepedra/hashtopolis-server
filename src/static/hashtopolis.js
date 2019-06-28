@@ -41,7 +41,7 @@ function sendRequest(section, form, onSuccess) {
                         delay: 2000
                     });
                     if (onSuccess !== undefined) {
-                        onSuccess();
+                        onSuccess(form);
                     }
                 } else {
                     $.toast({
@@ -56,7 +56,7 @@ function sendRequest(section, form, onSuccess) {
                     type = 'success';
                     title = 'Success!';
                     if (onSuccess !== undefined) {
-                        onSuccess();
+                        onSuccess(form);
                     }
                 } else {
                     type = 'error';
