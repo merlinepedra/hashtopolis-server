@@ -19,7 +19,7 @@ $(function () {
 });
 
 function archiveTask(button) {
-    $(button).tooltip.hide();
+    $("[data-toggle='tooltip']").tooltip('hide');
     if (confirm('Really archive this task?')) {
         sendRequest('tasks', button.form, function (form) {
             $('#tasks').DataTable().row(form.closest('tr')).remove().draw();
@@ -28,7 +28,7 @@ function archiveTask(button) {
 }
 
 function deleteTask(button) {
-    $(button).tooltip.hide();
+    $("[data-toggle='tooltip']").tooltip('hide');
     if (confirm('Really delete this task?')) {
         sendRequest('tasks', button.form, function (form) {
             $('#tasks').DataTable().row(form.closest('tr')).remove().draw();
