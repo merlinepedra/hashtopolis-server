@@ -27,7 +27,7 @@ function archiveTask(button) {
 }
 
 function setTaskPriority(button) {
-    sendRequest('tasks', button.form);
+    sendRequest('tasks', button);
     $(button).closest('td').attr('data-sort', button.form.priority.value);
     $('#tasks').DataTable().cells().invalidate().draw();
 }
