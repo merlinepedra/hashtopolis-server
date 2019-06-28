@@ -41,6 +41,7 @@ function sendRequest(section, form, toDelete) {
                         delay: 2000
                     });
                     if (toDelete !== undefined) {
+                        alert("DELETE!");
                         toDelete.outerHTML = "";
                     }
                 } else {
