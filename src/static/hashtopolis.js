@@ -18,9 +18,9 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
-function sendRequest(section, formId) {
+function sendRequest(section, form) {
     var elements = {};
-    var formData = document.getElementById(formId).elements;
+    var formData = form.elements;
 
     for (var i = 0; i < formData.length; i++) {
         elements[formData[i].name] = formData[i].value;
@@ -47,6 +47,25 @@ function sendRequest(section, formId) {
                         delay: 2000
                     });
                 }
+            } else {
+                var type, title;
+                if (result.status === 0) {
+                    type = 'success';
+                    title = 'Success!';
+                } else {
+                    type = 'error';
+                    title = 'Error!';
+                }
+                var messages = "";
+                for (var i = 0; i < result.messages.length; i++) {
+                    messages += result.messages[i].message + "<br>";
+                }
+                $.toast({
+                    title: title,
+                    content: messages,
+                    type: type,
+                    delay: 5000
+                });
             }
         }
     });
