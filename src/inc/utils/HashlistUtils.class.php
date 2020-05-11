@@ -1099,5 +1099,8 @@ class HashlistUtils {
     $qF = new QueryFilter(TaskWrapper::HASHLIST_ID, $hashlist->getId(), "=");
     $uS = new UpdateSet(TaskWrapper::ACCESS_GROUP_ID, $accessGroup->getId());
     Factory::getTaskWrapperFactory()->massUpdate([Factory::FILTER => $qF, Factory::UPDATE => $uS]);
+    
+    $hashlist->setAccessGroupId($accessGroup->getId());
+    Factory::getHashlistFactory()->update($hashlist);
   }
 }
