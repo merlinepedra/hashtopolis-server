@@ -3,6 +3,7 @@
 ## Bugfixes
 
 - Fixed search hash function.
+- Fixed changing of access groups of hashlists.
 
 # v0.11.0 -> v0.12.0
 
